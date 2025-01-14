@@ -6,13 +6,8 @@ from pydub import AudioSegment
 
 """
 TODO:
-
-    Add command line argument for:
-        - folder
-        - output format
-    
-    Search through folder for .flac files
-    Output files to selected output format with shrunken names
+    - Parse files
+    - Automate path search...?
 """
 
 DEFAULT_ALBUM_NAME: str = 'None'
@@ -22,7 +17,7 @@ DEFAULT_OUTPUT_FORMAT: str = 'mp3'
 DEFAULT_OUTPUT_RATE: str = '256k'
 DEFAULT_SOURCE_FILE_PATH: str = 'None'
 
-CONVERTED_FILE_DIR: str = '/CONVERTED/'
+CONVERTED_FILE_DIR: str = 'CONVERTED/'
 
 ARGUMENTS = [('--album', str, DEFAULT_ALBUM_NAME, 'Album name', '*'),
              ('--artist', str, DEFAULT_ARTIST_NAME, 'Artist name', '*'),
@@ -52,15 +47,6 @@ def retrieve_files(folder_path: str, original_file_format: str):
     return glob.glob(updated_path)
 
 
-def compute_file_count(file_list) -> int:
-    return len(file_list)
-
-
-def compute_track_tag(full_file_name: str) -> str:
-    print(full_file_name.split())
-
-
-
 def retrieve_filename_no_extension(file_name, input_format: str) -> str:
     song_name = file_name.split('/')
     song_name = song_name[-1]
@@ -72,7 +58,6 @@ def retrieve_filename_no_extension(file_name, input_format: str) -> str:
     final_split = mid_split.split('-')
 
     return final_split[-1].strip()
-    
 
 
 def create_converted_dir(new_dir_path: str):
